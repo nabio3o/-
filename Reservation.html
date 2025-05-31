@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>예매 페이지</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-black">
+  <!-- 헤더 -->
+  <header class="bg-red-600 text-white p-2 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <img src="https://via.placeholder.com/40" alt="logo" class="w-10 h-10" />
+      <h1 class="text-xl font-bold">ticketpage</h1>
+    </div>
+    <div class="flex items-center space-x-2">
+      <input type="text" placeholder="검색어를 입력하세요" class="p-2 rounded w-96 text-black" />
+      <button class="p-2 bg-white text-black rounded">🔍</button>
+    </div>
+    <div class="flex items-center space-x-4">
+      <a href="#" class="hover:underline">로그인</a>
+      <a href="#" class="hover:underline">회원가입</a>
+      <img src="https://via.placeholder.com/30" alt="profile" class="w-8 h-8 rounded-full bg-gray-300" />
+    </div>
+  </header>
+
+  <!-- 내비게이션 바 -->
+<!-- 내비게이션 바 -->
+<nav class="bg-white text-black p-2 border-b">
+  <ul class="flex justify-between text-sm w-full px-4">
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">뮤지컬/연극</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">콘서트</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">스포츠</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">전시/행사</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">레저</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">테마/지역</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">MD샵</li>
+    <li class="text-red-600 border-b-2 border-red-600 flex-1 text-center cursor-pointer">이벤트</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">티켓오픈소식</li>
+  </ul>
+</nav>
+
+
+  <!-- 콘텐츠 영역 -->
+  <main class="max-w-[1000px] mx-auto px-4 py-6">
+    <h2 class="text-2xl font-bold mb-4">쇼뮤지컬 어게인 &lt;드림하이&gt;</h2>
+    <div class="flex flex-wrap lg:flex-nowrap lg:space-x-8">
+      <div class="w-full lg:w-1/3 mb-6 lg:mb-0">
+        <img src="dreamhigh.jpg" alt="드림하이" class="w-full h-[460px] object-cover rounded" />
+      </div>
+      <div class="w-full lg:flex-1 space-y-2 text-sm mb-0 lg:mb-0">
+        <div><span class="inline-block w-20">장소</span>올림픽공원 우리금융아트홀</div>
+        <div><span class="inline-block w-20">공연기간</span>2025.04.05 ~ 2025.06.01</div>
+        <div><span class="inline-block w-20">공연시간</span>150분</div>
+        <div><span class="inline-block w-20">관람연령</span>8세 이상</div>
+       <div class="flex items-start">
+  <span class="inline-block w-20 flex-shrink-0">가격</span>
+  <div>
+    <div class="flex items-center space-x-2">
+      <span class="cursor-pointer text-sm text-black">전체 가격 보기 &gt;</span>
+    </div>
+    <div class="mt-1 text-gray-400 text-sm">
+      VIP석 170,000원<br>R석 140,000원<br>S석 140,000원<br>A석 140,000원
+    </div>
+  </div>
+</div>
+
+        <div><span class="inline-block w-20">혜택</span>무이자할부 &gt;</div>
+        <div><span class="inline-block w-20">프로모션</span></div>
+      </div>
+
+      <!-- 날짜 선택 + 회차 영역 -->
+      <div class="w-full lg:w-1/4 border rounded p-4 space-y-4">
+        <div class="flex justify-between items-center text-center text-sm font-semibold">
+          <button class="px-2">&lt;</button>
+          <div>2025. 6</div>
+          <button class="px-2">&gt;</button>
+        </div>
+        <div class="grid grid-cols-7 gap-y-4 text-center mt-2 text-xs border-b pb-2">
+          <div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div>
+          <div id="calendar" class="col-span-7 grid grid-cols-7 gap-y-4 text-center mt-1 text-xs"></div>
+        </div>
+        <div class="text-sm mt-4">회차</div>
+        <div id="showtime" class="border border-red-600 text-red-600 rounded px-3 py-1 text-sm w-fit">날짜를 선택하세요</div>
+
+        <div class="space-y-2 pt-4">
+          <button class="w-full bg-red-600 text-white py-2 rounded">예매하기</button>
+          <button class="w-full border border-red-600 text-red-600 py-2 rounded">BOOKING</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 탭 -->
+    <div class="bg-gray-100 border-t mt-6">
+      <div class="max-w-[1000px] mx-auto px-4">
+        <div class="flex justify-between text-sm text-black py-3 max-w-[800px] mx-auto">
+          <div class="text-red-600 font-semibold cursor-pointer">상세 정보</div>
+          <div class="flex items-center space-x-1 cursor-pointer">
+            <span>기대평</span><span class="bg-gray-300 text-xs rounded px-1">1492</span>
+          </div>
+          <div class="flex items-center space-x-1 cursor-pointer">
+            <span>Q&amp;A</span><span class="bg-gray-300 text-xs rounded px-1">32</span>
+          </div>
+          <div class="cursor-pointer">공연장 정보</div>
+          <div class="cursor-pointer">예매안내</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 상세 정보 -->
+    <div id="tab-detail" class="block">
+      <div class="py-6 flex flex-wrap lg:flex-nowrap justify-between items-start space-y-6 lg:space-y-0 lg:space-x-16 mt-0 border-t pt-6">
+        <div class="flex-1">
+          <div class="text-sm font-bold mb-2">출연진</div>
+          <div class="flex space-x-4 mb-4">
+            <div class="w-16 h-16 bg-gray-200 rounded-full"></div>
+            <div class="w-16 h-16 bg-gray-200 rounded-full"></div>
+            <div class="w-16 h-16 bg-gray-200 rounded-full"></div>
+            <div class="w-16 h-16 bg-gray-200 rounded-full"></div>
+          </div>
+        </div>
+        <div class="flex items-start space-x-6">
+          <button class="border border-gray-300 text-xs px-3 py-1 rounded h-fit">캐스팅 일정조회</button>
+          <div>
+            <div class="text-sm font-bold mb-2">예매자 통계</div>
+            <div class="flex space-x-4">
+              <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center">👤</div>
+              <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center">👥</div>
+              <div class="w-12 h-12 bg-black text-white rounded flex items-center justify-center">📊</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 공연장 정보 -->
+    <div id="tab-venue" class="hidden mt-6">
+      <div class="flex items-start space-x-8">
+       <img src="OlympicPark logo.png" alt="Olympic Park" class="w-40 h-auto border" />
+        <div class="space-y-2 text-sm">
+          <div>올림픽 공원</div>
+          <div>서울 송파구 방이동 88</div>
+          <div>02-410-1114</div>
+          <div><a href="https://www.ksponco.or.kr/olympicpark/" class="text-blue-600 underline" target="_blank">https://www.ksponco.or.kr/olympicpark/</a></div>
+        </div>
+      </div>
+      <div id="map" class="w-full h-96 mt-6 border rounded"></div>
+    </div>
+  </main>
+
+  <script>
+  const calendar = document.getElementById("calendar");
+  const showtime = document.getElementById("showtime");
+  const prevBtn = document.querySelector("button:nth-child(1)");
+  const nextBtn = document.querySelector("button:nth-child(3)");
+  const monthDisplay = document.querySelector("div.flex.justify-between div");
+
+  const schedule = {
+    4: {
+      days: 30,
+      firstDay: 2, // 화요일
+      shows: { 5: "1회 19:00", 12: "1회 20:00" },
+      prev: { lastDate: 31, startFrom: 30 },  // 3월
+      next: { startFrom: 1, count: 3 }        // 5월
+    },
+    5: {
+      days: 31,
+      firstDay: 4, // 목요일
+      shows: { 16: "1회 19:30", 17: "1회 20:00" },
+      prev: { lastDate: 30, startFrom: 27 },  // 4월
+    },
+    6: {
+      days: 30,
+      firstDay: 0, // 일요일
+      shows: { 1: "1회 18:00", 15: "1회 19:00" },
+      prev: null,
+      next: { startFrom: 1, count: 5 }        // 7월
+    }
+  };
+
+  let currentMonth = 4;
+  let currentSelected = null;
+
+  function renderCalendar(month) {
+    calendar.innerHTML = "";
+    currentSelected = null;
+    monthDisplay.textContent = `2025. ${month}`;
+
+    const { days, firstDay, shows, prev, next } = schedule[month];
+
+    // 1. 앞부분 이전 달 날짜 채우기
+    if (prev) {
+      const prevDays = firstDay;
+      const start = prev.startFrom;
+      for (let i = 0; i < prevDays; i++) {
+        const num = start + i;
+        const span = document.createElement("span");
+        span.textContent = num;
+        span.className = "inline-block w-7 h-7 leading-7 rounded-full text-gray-300";
+        const cell = document.createElement("div");
+        cell.appendChild(span);
+        calendar.appendChild(cell);
+      }
+    } else {
+      for (let i = 0; i < firstDay; i++) {
+        const cell = document.createElement("div");
+        calendar.appendChild(cell);
+      }
+    }
+
+    // 2. 본 월 날짜 렌더링
+    for (let i = 1; i <= days; i++) {
+      const weekday = (firstDay + i - 1) % 7;
+      const day = document.createElement("div");
+      day.id = `day-${i}`;
+      const span = document.createElement("span");
+      span.textContent = i;
+      span.className = "inline-block w-7 h-7 leading-7 rounded-full";
+
+      // 색상 조건
+      if (weekday === 0 || weekday === 6) {
+        span.classList.add("text-black"); // 일/토
+      } else {
+        span.classList.add("text-gray-300"); // 평일
+      }
+
+      if (shows[i]) {
+        span.classList.add("cursor-pointer");
+        span.onclick = () => selectDay(i, month);
+      }
+
+      day.appendChild(span);
+      calendar.appendChild(day);
+    }
+
+    // 3. 뒷부분 다음 달 날짜 채우기
+    if (next) {
+      for (let i = 0; i < next.count; i++) {
+        const span = document.createElement("span");
+        span.textContent = next.startFrom + i;
+        span.className = "inline-block w-7 h-7 leading-7 rounded-full text-gray-300";
+        const cell = document.createElement("div");
+        cell.appendChild(span);
+        calendar.appendChild(cell);
+      }
+    }
+
+    // 4. 자동 선택
+    const firstAvailable = Object.keys(shows)[0];
+    if (firstAvailable) selectDay(Number(firstAvailable), month);
+  }
+
+  function selectDay(day, month) {
+    if (currentSelected) {
+      const prev = document.getElementById(`day-${currentSelected}`);
+      if (prev) prev.querySelector("span").classList.remove("bg-red-600", "text-white");
+    }
+
+    const selected = document.getElementById(`day-${day}`);
+    if (selected) selected.querySelector("span").classList.add("bg-red-600", "text-white");
+
+    showtime.textContent = schedule[month].shows[day] || "날짜를 선택하세요";
+    currentSelected = day;
+  }
+
+  prevBtn.onclick = () => {
+    if (currentMonth > 4) {
+      currentMonth--;
+      renderCalendar(currentMonth);
+    }
+  };
+
+  nextBtn.onclick = () => {
+    if (currentMonth < 6) {
+      currentMonth++;
+      renderCalendar(currentMonth);
+    }
+  };
+
+  renderCalendar(currentMonth); // 초기 렌더링
+</script>
+
+
+  <!-- 카카오맵 SDK autoload 비활성화 -->
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=508c124c8ec10d15353d3ec0d454ba61&autoload=false"></script>
+
+  <!-- 탭 클릭 및 지도 생성 -->
+  <script>
+    const tabDetail = document.getElementById("tab-detail");
+    const tabVenue = document.getElementById("tab-venue");
+    const tabs = document.querySelectorAll(".cursor-pointer");
+    let mapCreated = false;
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", e => {
+        const label = e.target.textContent.trim();
+        tabs.forEach(t => t.classList.remove("text-red-600", "font-semibold", "border-b-2", "border-red-600"));
+        e.target.classList.add("text-red-600", "font-semibold", "border-b-2", "border-red-600");
+
+        if (label === "공연장 정보") {
+          tabDetail.classList.add("hidden");
+          tabVenue.classList.remove("hidden");
+
+          if (!mapCreated) {
+            kakao.maps.load(() => {
+              const mapContainer = document.getElementById('map');
+              const mapOption = {
+                center: new kakao.maps.LatLng(37.516566, 127.121488),
+                level: 3
+              };
+              const map = new kakao.maps.Map(mapContainer, mapOption);
+              new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(37.516566, 127.121488),
+                map: map
+              });
+              mapCreated = true;
+            });
+          }
+
+        } else if (label === "상세 정보") {
+          tabVenue.classList.add("hidden");
+          tabDetail.classList.remove("hidden");
+        } else {
+          tabVenue.classList.add("hidden");
+          tabDetail.classList.add("hidden");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

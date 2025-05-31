@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>티켓 오픈 소식</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-black">
+
+  <!-- 헤더 -->
+  <header class="bg-red-600 text-white p-2 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <img src="https://via.placeholder.com/40" alt="logo" class="w-10 h-10" />
+      <h1 class="text-xl font-bold">ticketpage</h1>
+    </div>
+    <div class="flex items-center space-x-2">
+      <input type="text" placeholder="검색어를 입력하세요" class="p-2 rounded w-96 text-black" />
+      <button class="p-2 bg-white text-black rounded">🔍</button>
+    </div>
+    <div class="flex items-center space-x-4">
+      <a href="#" class="hover:underline">로그인</a>
+      <a href="#" class="hover:underline">회원가입</a>
+      <img src="https://via.placeholder.com/30" alt="profile" class="w-8 h-8 rounded-full bg-gray-300" />
+    </div>
+  </header>
+
+  <!-- 내비게이션 바 -->
+  <!-- 내비게이션 바 -->
+<nav class="bg-white text-black p-2 border-b">
+  <ul class="flex justify-between text-sm w-full px-4">
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">뮤지컬/연극</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">콘서트</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">스포츠</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">전시/행사</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">레저</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">테마/지역</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">MD샵</li>
+    <li class="text-red-600 border-b-2 border-red-600 flex-1 text-center cursor-pointer">이벤트</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">티켓오픈소식</li>
+  </ul>
+</nav>
+
+
+  <!-- HOT 공연 오픈 소식 + 배너 -->
+<section class="max-w-[1000px] mx-auto px-4 flex justify-between py-6 items-start">
+  <!-- 왼쪽 HOT 공연 -->
+  <div class="flex-1 mr-6">
+    <div class="flex justify-between items-center mb-2">
+      <div class="text-red-600 font-semibold">HOT 공연 오픈 소식</div>
+      <div class="flex items-center text-xs text-gray-500 space-x-2">
+        <button onclick="changeHotPage('prev')" class="px-2 py-0.5 border rounded text-gray-500">&lt;</button>
+        <span id="hotPageIndicator">1 / 2</span>
+        <button onclick="changeHotPage('next')" class="px-2 py-0.5 border rounded text-gray-500">&gt;</button>
+      </div>
+    </div>
+
+    <div id="hotItems" class="grid grid-cols-4 gap-4"></div>
+  </div>
+
+  <!-- 오른쪽 배너 -->
+  <aside class="w-36 shrink-0">
+    <div class="border rounded-lg p-4">
+      <div class="flex flex-col items-center mb-6">
+        <div class="w-28 h-36 bg-gray-300"></div>
+        <p class="text-red-500 text-sm mt-2 font-semibold">첫공 초대권 증정</p>
+      </div>
+      <hr class="my-4 border-gray-300" />
+      <div class="flex flex-col items-center mt-6">
+        <div class="w-28 h-36 bg-gray-300"></div>
+        <p class="text-red-500 text-sm mt-2 font-semibold">Time Sale</p>
+      </div>
+    </div>
+  </aside>
+</section>
+
+  <!-- 티켓 오픈 리스트 -->
+  <main class="max-w-[1000px] mx-auto px-4 py-8">
+    <div id="ticketList" class="space-y-4"></div>
+    <div class="flex justify-center mt-6 space-x-2" id="pagination"></div>
+  </main>
+
+  <script>
+    // HOT 공연 오픈 소식
+    const hotItems = Array.from({ length: 8 }, (_, i) => ({
+      title: `<콘서트 이름 ${i + 1}>`,
+      date: `[오픈]25.05.${(i + 10).toString().padStart(2, '0')}(금)`
+    }));
+
+    let currentHotPage = 1;
+    const hotItemsPerPage = 4;
+    const totalHotPages = Math.ceil(hotItems.length / hotItemsPerPage);
+
+    function renderHotItems() {
+      const container = document.getElementById("hotItems");
+      container.innerHTML = "";
+
+      const start = (currentHotPage - 1) * hotItemsPerPage;
+      const end = start + hotItemsPerPage;
+      const pageItems = hotItems.slice(start, end);
+
+      pageItems.forEach((item, i) => {
+        container.innerHTML += `
+          <div class="text-center">
+            <div class="bg-gray-200 h-60 w-full mb-2"></div>
+            <div class="font-semibold">${item.title}</div>
+            <div class="text-sm text-gray-600">${i === 2 && currentHotPage === 1 ? '오픈일정 보기 &gt;' : item.date}</div>
+          </div>
+        `;
+      });
+
+      document.getElementById("hotPageIndicator").textContent = `${currentHotPage} / ${totalHotPages}`;
+    }
+
+    function changeHotPage(direction) {
+      if (direction === 'prev' && currentHotPage > 1) currentHotPage--;
+      if (direction === 'next' && currentHotPage < totalHotPages) currentHotPage++;
+      renderHotItems();
+    }
+
+    // 티켓 오픈 리스트
+    let currentPage = 1;
+    const totalPages = 20;
+    let currentBlock = 1;
+    const pagesPerBlock = 10;
+
+    const data = {};
+    let totalItems = totalPages * 10;
+    for (let p = 1; p <= totalPages; p++) {
+      const page = [];
+      for (let i = 0; i < 10; i++) {
+        const number = totalItems--;
+        page.push({
+          title: `콘서트 이름 ${number}`,
+          date: `2025.05.${(number % 30 + 1).toString().padStart(2, '0')}`,
+          regDate: `2025.05.${(Math.max(1, (number % 30 - 3))).toString().padStart(2, '0')}`,
+          time: `20:00`,
+          views: Math.floor(Math.random() * 100 + 10),
+          isExclusive: number % 3 !== 0
+        });
+      }
+      data[p] = page;
+    }
+
+    function renderPagination() {
+      const container = document.getElementById("pagination");
+      container.innerHTML = "";
+
+      const startPage = (currentBlock - 1) * pagesPerBlock + 1;
+      const endPage = Math.min(currentBlock * pagesPerBlock, totalPages);
+
+      container.innerHTML += `<button onclick="goToPage(1)" class="px-3 py-1 rounded border border-gray-300 text-gray-400">&laquo;</button>`;
+      container.innerHTML += `<button onclick="goToPrevBlock()" class="px-3 py-1 rounded border border-gray-300 text-gray-400">&lt;</button>`;
+
+      for (let i = startPage; i <= endPage; i++) {
+        container.innerHTML += `<button id="page-btn-${i}" onclick="loadPage(${i})" class="pagination-btn px-3 py-1 rounded border border-gray-300">${i}</button>`;
+      }
+
+      container.innerHTML += `<button onclick="goToNextBlock()" class="px-3 py-1 rounded border border-gray-300 text-gray-500">&gt;</button>`;
+      container.innerHTML += `<button onclick="goToPage(totalPages)" class="px-3 py-1 rounded border border-gray-300 text-gray-500">&raquo;</button>`;
+    }
+
+    function loadPage(page) {
+      if (page < 1 || page > totalPages) return;
+      const list = document.getElementById("ticketList");
+      list.innerHTML = "";
+      data[page].forEach(item => {
+        list.innerHTML += `
+          <div class="border-b pb-4 pt-2 flex justify-between items-center">
+            <div class="flex flex-col text-xs text-gray-600 w-[120px]">
+              <div>티켓 오픈일</div>
+              <div class="text-black text-xs mt-1">${item.date}(${['일','월','화','수','목','금','토'][new Date(item.date).getDay()]}) ${item.time}</div>
+            </div>
+            <div class="flex-1 pl-24 flex flex-col justify-center">
+              ${item.isExclusive ? '<div class="inline-block text-xs bg-green-600 text-white px-2 py-0.5 rounded w-fit mb-1">단독판매</div>' : ''}
+              <div class="text-base font-medium">${item.title} 티켓 오픈 안내</div>
+              <div class="mt-1 text-sm text-gray-500">등록일 ${item.regDate} │ 조회 ${item.views}</div>
+            </div>
+            <div class="w-[90px] h-[120px] bg-gray-200 flex-shrink-0"></div>
+          </div>
+        `;
+      });
+
+      document.querySelectorAll(".pagination-btn").forEach(btn => btn.classList.remove("text-green-600", "font-bold"));
+      document.querySelector(`#page-btn-${page}`)?.classList.add("text-green-600", "font-bold");
+
+      currentPage = page;
+
+      const newBlock = Math.ceil(currentPage / pagesPerBlock);
+      if (newBlock !== currentBlock) {
+        currentBlock = newBlock;
+        renderPagination();
+        document.querySelector(`#page-btn-${page}`)?.classList.add("text-green-600", "font-bold");
+      }
+    }
+
+    function goToPage(page) {
+      if (page < 1 || page > totalPages) return;
+      loadPage(page);
+    }
+
+    function goToNextBlock() {
+      if (currentPage <= totalPages - pagesPerBlock) {
+        loadPage(currentPage + pagesPerBlock);
+      }
+    }
+
+    function goToPrevBlock() {
+      if (currentPage > pagesPerBlock) {
+        loadPage(currentPage - pagesPerBlock);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderHotItems();
+      renderPagination();
+      loadPage(1);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>참여 이벤트</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-black">
+
+  <!-- 헤더 -->
+  <header class="bg-red-600 text-white p-2 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <img src="https://via.placeholder.com/40" alt="logo" class="w-10 h-10" />
+      <h1 class="text-xl font-bold">ticketpage</h1>
+    </div>
+    <div class="flex items-center space-x-2">
+      <input type="text" placeholder="검색어를 입력하세요" class="p-2 rounded w-96 text-black" />
+      <button class="p-2 bg-white text-black rounded">🔍</button>
+    </div>
+    <div class="flex items-center space-x-4">
+      <a href="#" class="hover:underline">로그인</a>
+      <a href="#" class="hover:underline">회원가입</a>
+      <img src="https://via.placeholder.com/30" alt="profile" class="w-8 h-8 rounded-full bg-gray-300" />
+    </div>
+  </header>
+
+  <!-- 내비게이션 바 -->
+<!-- 내비게이션 바 -->
+<nav class="bg-white text-black p-2 border-b">
+  <ul class="flex justify-between text-sm w-full px-4">
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">뮤지컬/연극</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">콘서트</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">스포츠</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">전시/행사</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">레저</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">테마/지역</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">MD샵</li>
+    <li class="text-red-600 border-b-2 border-red-600 flex-1 text-center">이벤트</li>
+    <li class="hover:text-red-600 flex-1 text-center cursor-pointer">티켓오픈소식</li>
+  </ul>
+</nav>
+
+
+
+  <!-- 검색창 -->
+  <section class="pt-20 pb-6">
+    <div class="w-full flex justify-end max-w-[1000px] mx-auto px-4">
+      <div class="flex mr-[0.25rem]">
+        <input type="text" placeholder="이벤트 검색" class="p-2 border rounded w-80" />
+        <button class="ml-2 px-4 py-2 bg-black text-white rounded">검색</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 이벤트 카드 영역 -->
+  <section class="max-w-[1000px] mx-auto px-4 pb-10 space-y-6">
+    <div class="border rounded-lg p-4 flex space-x-4 items-center ">
+      <div class="w-[180px] h-[120px] bg-gray-200 flex items-center justify-center text-gray-500">
+        이미지 자리
+      </div>
+      <div class="flex-1">
+        <div class="text-red-500 text-sm font-semibold mb-1">선정중</div>
+        <h2 class="text-lg font-bold mb-2">제8회 티켓페이지 콘서트 티켓 선예매 응모</h2>
+        <p class="text-sm text-gray-700">이벤트 기간: 2025.04.XX ~ 2025.05.XX</p>
+        <p class="text-sm text-gray-700">당첨 혜택 : 제8회 티켓페이지 콘서트 티켓 선예매 추첨</p>
+      </div>
+    </div>
+
+    <div class="border rounded-lg p-4 flex space-x-4 items-center ">
+      <div class="w-[180px] h-[120px] bg-gray-200 flex items-center justify-center text-gray-500">
+        이미지 자리
+      </div>
+      <div class="flex-1">
+        <div class="text-red-500 text-sm font-semibold mb-1">선정중</div>
+        <h2 class="text-lg font-bold mb-2">제8회 티켓페이지 콘서트 티켓 선예매 응모</h2>
+        <p class="text-sm text-gray-700">이벤트 기간: 2025.04.XX ~ 2025.05.XX</p>
+        <p class="text-sm text-gray-700">당첨 혜택 : 제8회 티켓페이지 콘서트 티켓 선예매 추첨</p>
+      </div>
+    </div>
+
+    <div class="border rounded-lg p-4 flex space-x-4 items-center ">
+      <div class="w-[180px] h-[120px] bg-gray-200 flex items-center justify-center text-gray-500">
+        이미지 자리
+      </div>
+      <div class="flex-1">
+        <div class="text-green-500 text-sm font-semibold mb-1">완료</div>
+        <h2 class="text-lg font-bold mb-2">제8회 티켓페이지 콘서트 티켓 선예매 응모</h2>
+        <p class="text-sm text-gray-700">이벤트 기간: 2025.04.XX ~ 2025.05.XX</p>
+        <p class="text-sm text-gray-700">당첨 혜택 : 제8회 티켓페이지 콘서트 티켓 선예매 추첨</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

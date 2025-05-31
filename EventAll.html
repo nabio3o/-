@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>전체 이벤트</title>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const bannerOptions = [
+      { title: "기대평 남기면 초대권 증정!", date: "~ 6.1(일)", bg: "bg-green-700" },
+      { title: "[초대권 증정] 뮤지컬 A 기대평 이벤트", date: "~ 6.2(월)", bg: "bg-blue-700" },
+      { title: "[티켓페이지 단독혜택] 기대평 이벤트", date: "~ 6.3(화)", bg: "bg-purple-700" },
+      { title: "[초대권 증정] 뮤지컬 B 기대평 이벤트", date: "~ 6.4(수)", bg: "bg-pink-700" },
+    ];
+
+    const totalPages = 20;
+    const pagesPerBlock = 10;
+
+    const EventPage = () => {
+      const [banner, setBanner] = React.useState(bannerOptions[0]);
+      const [currentPage, setCurrentPage] = React.useState(1);
+      const currentBlock = Math.ceil(currentPage / pagesPerBlock);
+
+      const handlePageChange = (page) => {
+        if (page < 1 || page > totalPages) return;
+        setCurrentPage(page);
+      };
+
+      const renderPagination = () => {
+        const startPage = (currentBlock - 1) * pagesPerBlock + 1;
+        const endPage = Math.min(currentBlock * pagesPerBlock, totalPages);
+
+        const buttons = [];
+        for (let i = startPage; i <= endPage; i++) {
+          buttons.push(
+            <button
+              key={i}
+              onClick={() => handlePageChange(i)}
+              className={`px-3 py-1 rounded border border-gray-300 ${currentPage === i ? 'text-green-600 font-bold' : ''}`}
+            >
+              {i}
+            </button>
+          );
+        }
+
+        return (
+          <div className="flex justify-center space-x-2">
+            <button onClick={() => handlePageChange(1)} className="px-3 py-1 rounded border border-gray-300 text-gray-500">&laquo;</button>
+            <button onClick={() => { if (currentPage > 10) handlePageChange(1); }} className="px-3 py-1 rounded border border-gray-300 text-gray-500">&lt;</button>
+            {buttons}
+            <button onClick={() => { if (currentPage <= 10) handlePageChange(11); }} className="px-3 py-1 rounded border border-gray-300 text-gray-500">&gt;</button>
+            <button onClick={() => handlePageChange(totalPages)} className="px-3 py-1 rounded border border-gray-300 text-gray-500">&raquo;</button>
+          </div>
+        );
+      };
+
+      return (
+        <div className="bg-white min-h-screen">
+          {/* 헤더 */}
+          <header className="bg-red-600 text-white p-2 flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <img src="https://via.placeholder.com/40" alt="logo" className="w-10 h-10" />
+              <h1 className="text-xl font-bold">ticketpage</h1>
+            </div>
+            <div className="flex items-center space-x-2">
+              <input type="text" placeholder="검색어를 입력하세요" className="p-2 rounded w-96 text-black" />
+              <button className="p-2 bg-white text-black rounded">🔍</button>
+            </div>
+            <div className="flex items-center space-x-4">
+              <a href="#" className="hover:underline">로그인</a>
+              <a href="#" className="hover:underline">회원가입</a>
+              <img src="https://via.placeholder.com/30" alt="profile" className="w-8 h-8 rounded-full bg-gray-300" />
+            </div>
+          </header>
+
+          {/* 내비게이션 바 */}
+          <nav className="bg-white text-black p-2 border-b">
+            <ul className="flex justify-between text-sm max-w-[1000px] mx-auto">
+              <li className="hover:text-red-600 flex-1 text-center cursor-pointer">뮤지컬/연극</li>
+              <li className="hover:text-red-600 flex-1 text-center cursor-pointer">콘서트</li>
+              <li className="hover:text-red-600 flex-1 text-center cursor-pointer">스포츠</li>
+              <li className="hover:text-red-600 flex-1 text-center cursor-pointer">전시/행사</li>
+              <li className="hover:text-red-600 flex-1 text-center cursor-pointer">레저</li>
+              <li className="hover:text-red-600 flex-1 text-center cursor-pointer">테마/지역</li>
+              <li className="hover:text-red-600 flex-1 text-center cursor-pointer">MD샵</li>
+              <li className="text-red-600 border-b-2 border-red-600 flex-1 text-center cursor-pointer">이벤트</li>
+              <li className="hover:text-red-600 flex-1 text-center cursor-pointer">티켓오픈소식</li>
+            </ul>
+          </nav>
+
+          {/* 본문 */}
+          <main className="max-w-[600px] mx-auto">
+            <section className="px-4 pt-6">
+              <div className="flex space-x-4 items-start">
+                <div className="w-3/5">
+                  <div className={`h-80 ${banner.bg} text-white p-6`}>
+                    <h2 className="text-2xl font-bold mb-2">{banner.title}</h2>
+                    <p>기간: {banner.date}</p>
+                  </div>
+                  <div className="bg-white border grid grid-cols-4 divide-x divide-gray-300">
+                    {bannerOptions.map((opt, i) => (
+                      <div
+                        key={i}
+                        onClick={() => setBanner(opt)}
+                        className="cursor-pointer flex items-center justify-center text-xs text-black px-2 py-3 text-center truncate hover:bg-gray-100"
+                      >
+                        {opt.title.length > 18 ? opt.title.slice(0, 18) + '...' : opt.title}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex-1 h-80 bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-600">ticketpage</span>
+                </div>
+                <aside className="w-36 shrink-0">
+                  <div className="border rounded-lg p-4">
+                    <div className="flex flex-col items-center mb-6">
+                      <div className="w-28 h-36 bg-gray-300" />
+                      <p className="text-red-500 text-sm mt-2 font-semibold">첫공 초대권 증정</p>
+                    </div>
+                    <hr className="my-4 border-gray-300" />
+                    <div className="flex flex-col items-center mt-6">
+                      <div className="w-28 h-36 bg-gray-300" />
+                      <p className="text-red-500 text-sm mt-2 font-semibold">Time Sale</p>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </section>
+
+            <section className="px-4 pt-20 pb-6">
+              <div className="w-full flex justify-end max-w-[1000px] mx-auto">
+                <input type="text" placeholder="이벤트 검색" className="p-2 border rounded w-80" />
+                <button className="ml-2 px-4 py-2 bg-black text-white rounded">검색</button>
+              </div>
+            </section>
+
+            <section className="px-4 pb-6">
+              <div className="grid grid-cols-3 gap-6">
+                {[1, 2, 3].map((_, i) => (
+                  <div key={i} className="border p-2 h-72">
+                    <img src="https://via.placeholder.com/300x150" alt="event" className="w-full mb-2" />
+                    <p className="text-sm mt-1">[이벤트 타이틀]</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="px-4 pb-12">
+              <div className="grid grid-cols-3 gap-6">
+                {[4, 5, 6].map((_, i) => (
+                  <div key={i} className="border p-2 h-72">
+                    <img src="https://via.placeholder.com/300x150" alt="event" className="w-full mb-2" />
+                    <p className="text-sm mt-1">[이벤트 타이틀]</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="px-4 pb-12">
+              {renderPagination()}
+            </section>
+          </main>
+        </div>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<EventPage />);
+  </script>
+</body>
+</html>
